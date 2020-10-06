@@ -4,19 +4,20 @@ import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Alert from "../components/Alert";
+import Layout from "../components/EmployeeTable"
 
 class Search extends Component {
   state = {
-    search: "",
-    breeds: [],
+    search: [],
+    employees: [],
     results: [],
     error: ""
   };
 
   // When the component mounts, get a list of all available base breeds and update this.state.breeds
   componentDidMount() {
-    API.getBaseBreedsList()
-      .then(res => this.setState({ breeds: res.data.message }))
+    API.getRandomEmployees()
+      .then(res => this.setState({ employees: res.data.results }))
       .catch(err => console.log(err));
   }
 
@@ -24,17 +25,17 @@ class Search extends Component {
     this.setState({ search: event.target.value });
   };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    API.getDogsOfBreed(this.state.search)
-      .then(res => {
-        if (res.data.status === "error") {
-          throw new Error(res.data.message);
-        }
-        this.setState({ results: res.data.message, error: "" });
-      })
-      .catch(err => this.setState({ error: err.message }));
-  };
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   API.getDogsOfBreed(this.state.search)
+  //     .then(res => {
+  //       if (res.data.status === "error") {
+  //         throw new Error(res.data.message);
+  //       }
+  //       this.setState({ results: res.data.message, error: "" });
+  //     })
+  //     .catch(err => this.setState({ error: err.message }));
+  // };
   render() {
     return (
       <div>
@@ -49,9 +50,10 @@ class Search extends Component {
           <SearchForm
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
-            breeds={this.state.breeds}
+            employees={this.state.employees}
           />
           <SearchResults results={this.state.results} />
+          <Layout employees= {this.state.employees}></Layout>
         </Container>
       </div>
     );

@@ -22,8 +22,8 @@ function Layout(props){
                         <td><img src={employee.picture.small} alt="img of employee"></img></td>
                         <td>{employee.name.first}</td>
                         <td>{employee.name.last}</td>
-                        <td>{employee.name.gender}</td>
-                        <td>{employee.name.age}</td>
+                        <td>{employee.gender}</td>
+                        <td>{employee.dob.age}</td>
                         <td>{employee.cell} </td>
                         <td>{employee.email}</td>
                     </tr>
