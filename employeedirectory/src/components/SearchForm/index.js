@@ -6,7 +6,7 @@ function SearchForm(props) {
   return (
     <form className="search">
       <div className="form-group">
-        <label htmlFor="employee">Breed Name:</label>
+        <label htmlFor="employee"></label>
         <input
           value={props.search}
           onChange={props.handleInputChange}
@@ -19,10 +19,10 @@ function SearchForm(props) {
         />
         <datalist id="employees">
           {props.employees.map(employee => (
-            <option value={employee.name.first} key={employee.name.last} />
+            <option value={employee.name.first} key={employee.name.first} />
           ))}
         </datalist>
-        <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+        <button type="submit" onClick={props.handleFormSubmit} className="btn btn-lg-success">
           Search
         </button>
       </div>

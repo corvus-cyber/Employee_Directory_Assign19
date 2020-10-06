@@ -5,13 +5,15 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Alert from "../components/Alert";
 import Layout from "../components/EmployeeTable"
+import Row from "../components/Row"
+import Col from "../components/Col";
 
 class Search extends Component {
   state = {
     search: [],
     employees: [],
     results: [],
-    error: ""
+    error: "",
   };
 
   // When the component mounts, get a list of all available base breeds and update this.state.breeds
@@ -25,35 +27,39 @@ class Search extends Component {
     this.setState({ search: event.target.value });
   };
 
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   API.getDogsOfBreed(this.state.search)
-  //     .then(res => {
-  //       if (res.data.status === "error") {
-  //         throw new Error(res.data.message);
-  //       }
-  //       this.setState({ results: res.data.message, error: "" });
-  //     })
-  //     .catch(err => this.setState({ error: err.message }));
-  // };
+  handleFormSubmit = event => {
+    event.preventDefault();
+    API.getParticularEmployee(this.state.search)
+      .then(res => {
+        if (res.data.status === "error") {
+          throw new Error(res.data.results);
+        }
+        this.setState({ results: res.data.results, error: "" });
+      })
+      .catch(err => this.setState({ error: err.results }));
+  };
   render() {
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
-          <h1 className="text-center">Search By Breed!</h1>
           <Alert
             type="danger"
             style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}
           >
             {this.state.error}
           </Alert>
-          <SearchForm
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange}
-            employees={this.state.employees}
-          />
+          <Row className="justify-content-md-center">
+            <Col size="md-12">
+              <SearchForm
+                handleFormSubmit={this.handleFormSubmit}
+                handleInputChange={this.handleInputChange}
+                employees={this.state.employees}
+              />
+            </Col>
+          </Row>
+
           <SearchResults results={this.state.results} />
-          <Layout employees= {this.state.employees}></Layout>
+          <Layout employees= {this.state.employees}/>
         </Container>
       </div>
     );
