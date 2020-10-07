@@ -6,7 +6,7 @@ import SearchResults from "../components/SearchResults";
 import Alert from "../components/Alert";
 import Maintable from "../components/EmployeeTable"
 import Row from "../components/Row"
-import Col from "../components/Col";
+import Hero from "../components/Hero"
 
 class Search extends Component {
   state = {
@@ -30,6 +30,7 @@ class Search extends Component {
       let chosen = filter.name.first + filter.name.last 
       return chosen.indexOf(this.state.search) !== -1;
     })
+    console.log(filteredChoice)
     this.setState({searchedEmp: filteredChoice})
   };
 
@@ -48,14 +49,16 @@ class Search extends Component {
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
+          <Hero backgroundImage="https://image.shutterstock.com/z/stock-photo-successful-team-group-of-young-business-people-working-and-communicating-together-in-creative-583591807.jpg">
+          </Hero>
           <Alert
             type="danger"
             style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}
           >
             {this.state.error}
           </Alert>
-          <Row className="d-flex justify-content-md-center">
-            <div className="col-12">
+          <Row>
+            <div className="col-10">
               <SearchForm
                 handleInputChange={this.handleInputChange}
                 employees={this.state.employees}
