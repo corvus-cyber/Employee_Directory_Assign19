@@ -1,6 +1,6 @@
 import React from "react";
 
-function Layout(props){
+function Maintable(props){
     return(
         <table className="table table-striped">
             <thead>
@@ -17,7 +17,7 @@ function Layout(props){
             </thead>
             <tbody>
                 {props.employees.map( (employee, index) => (
-                    <tr>
+                    <tr key={employee.email}>
                         <th scope="row">{index+1}</th>
                         <td><img src={employee.picture.thumbnail} alt="img of employee"></img></td>
                         <td>{employee.name.first}</td>
@@ -33,4 +33,4 @@ function Layout(props){
     )
 } 
 
-export default Layout;
+export default Maintable;

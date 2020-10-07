@@ -16,7 +16,7 @@ function SearchResults(props) {
             {props.results.map( (employee, index) => (
                 <tr>
                     <th scope="row">{index+1}</th>
-                    <td><img src={employee.picture.thumbnail} alt="img of employee"></img></td>
+                    <td><img src={employee.picture.thumbnail} alt="img of chosen employee"></img></td>
                     <td>{employee.name.first}</td>
                     <td>{employee.name.last}</td>
                 </tr>

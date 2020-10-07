@@ -4,7 +4,7 @@ import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Alert from "../components/Alert";
-import Layout from "../components/EmployeeTable"
+import Maintable from "../components/EmployeeTable"
 import Row from "../components/Row"
 import Col from "../components/Col";
 
@@ -12,6 +12,7 @@ class Search extends Component {
   state = {
     search: [],
     employees: [],
+    searchedEmp: [],
     results: [],
     error: "",
   };
@@ -25,11 +26,16 @@ class Search extends Component {
 
   handleInputChange = event => {
     this.setState({ search: event.target.value });
+    const filteredChoice = this.state.employees.filter((filter)=>{
+      let chosen = filter.name.first + filter.name.last 
+      return chosen.indexOf(this.state.search) !== -1;
+    })
+
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    API.getParticularEmployee(this.state.search)
+    API.getSearchedEmployee(this.state.search)
       .then(res => {
         if (res.data.status === "error") {
           throw new Error(res.data.results);
@@ -57,9 +63,10 @@ class Search extends Component {
               />
             </Col>
           </Row>
-
-          <SearchResults results={this.state.results} />
-          <Layout employees= {this.state.employees}/>
+          <Row className="justify-content-md-center">
+            <SearchResults results={this.state.results} />
+            <Maintable employees= {this.state.employees}/>
+          </Row>
         </Container>
       </div>
     );
