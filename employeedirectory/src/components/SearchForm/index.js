@@ -4,8 +4,8 @@ import "./style.css";
 // Using the datalist element we can create autofill suggestions based on the props.breeds array
 function SearchForm(props) {
   return (
-    <form className="search">
-      <div className="form-group">
+    <form className="search offset-lg-4">
+      <div className="form-group justify-content-center">
         <label htmlFor="employee"></label>
         <input
           value={props.search}
@@ -22,9 +22,9 @@ function SearchForm(props) {
             <option value={employee.name.first + " " +employee.name.last} key={employee.name.first} />
           ))}
         </datalist> */}
-        {/* <button type="submit" onClick={props.handleFormSubmit} className="btn btn-lg-success">
+        <button type="submit" onClick={props.handleFormSubmit} className="btn btn-lg-success">
           Search
-        </button> */}
+        </button>
       </div>
     </form>
   );
