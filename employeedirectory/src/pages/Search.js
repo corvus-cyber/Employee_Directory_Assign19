@@ -57,12 +57,6 @@ class Search extends Component {
         <Container style={{ minHeight: "80%" }}>
           <Hero >
           </Hero>
-          <Alert
-            type="danger"
-            style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}
-          >
-            {this.state.error}
-          </Alert>
           <Row>
             <div className="col-10">
               <SearchForm
