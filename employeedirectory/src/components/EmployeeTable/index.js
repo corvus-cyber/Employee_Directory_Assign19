@@ -3,7 +3,7 @@ import React from "react";
 function Maintable(props){
     return(
         <table className="table table-striped">
-            <thead>
+            <thead className="thead-dark">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Image</th>

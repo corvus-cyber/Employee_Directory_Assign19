@@ -8,7 +8,6 @@ import Maintable from "../components/EmployeeTable"
 import Row from "../components/Row"
 import Hero from "../components/Hero"
 
-
 class Search extends Component {
   state = {
     search: [],
@@ -25,18 +24,25 @@ class Search extends Component {
       .catch(err => console.log(err));
   };
 
+
   handleInputChange = event => {
-    this.setState({ search: event.target.value });
+    let searchkey= event.target.value;
+    console.log("searchkey", searchkey)
+    let uppercaseKey= searchkey.charAt(0).toUpperCase() + searchkey.slice(1);
+    console.log("uppercase", uppercaseKey)
+    this.setState({ search: uppercaseKey});
+    
     const filteredChoice = this.state.employees.filter((filter)=>{
       let chosen = filter.name.first + filter.name.last + filter.gender
       console.log(event.target.value)
-      return chosen.indexOf(event.target.value) !== -1;
+      return chosen.indexOf(uppercaseKey) !== -1;
     })
     this.setState({searchedEmp: filteredChoice})
   };
 
 
   render() {
+
     let table;
     const searched = this.state.search;
     let alterstate
@@ -44,12 +50,12 @@ class Search extends Component {
     else{alterstate=true}
     {console.log(searched)}
     {console.log(alterstate)}
-    if (alterstate=false){table=<Maintable employees= {this.state.employees} />} 
+    if (alterstate===false){table=<Maintable employees= {this.state.employees} />} 
     else {table=<SearchResults results={this.state.searchedEmp}/>}
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
-          <Hero>
+          <Hero >
           </Hero>
           <Alert
             type="danger"
@@ -67,8 +73,6 @@ class Search extends Component {
           </Row>
           <Row className="justify-content-md-center">
             {table}
-            {/* <SearchResults results={this.state.searchedEmp} />
-            <Maintable employees= {this.state.employees}/> */}
           </Row>
         </Container>
       </div>
