@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter, Route, Link } from "react-router-dom";
 
 import Search from "./pages/Search";
 import Header from "./components/Header";
@@ -8,7 +8,7 @@ import Wrapper from "./components/Wrapper";
 
 function App() {
   return (
-    <Router>
+    <HashRouter basename='/'>
       <div>
         <Header />
         <Wrapper>
@@ -17,8 +17,10 @@ function App() {
         </Wrapper>
         <Footer />
       </div>
-    </Router>
+    </HashRouter>
   );
 }
+
+
 
 export default App;

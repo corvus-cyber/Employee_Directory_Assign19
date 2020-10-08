@@ -3,7 +3,6 @@ import API from "../utils/API";
 import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
-import Alert from "../components/Alert";
 import Maintable from "../components/EmployeeTable"
 import Row from "../components/Row"
 import Hero from "../components/Hero"
