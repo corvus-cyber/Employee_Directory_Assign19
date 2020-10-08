@@ -25,7 +25,7 @@ As an enduser, I want to be able to access my employee directory, being able to 
 * With this being my first React app I was more concerned with building a good app that had a narrower capacity rather than a poor app with a broad capacity. With that said, if I had more time I would like to be able to craft more search perameters so that the user could have more options with searching. Age, gender, phone-number and email would all be good search perameters to add with later iterations.
 
 ## Link
-[Deployed Link](./employeedirectory/src/images/screenshot.png)
+[Deployed Link](https://corvus-cyber.github.io/Employee_Directory_Assign19/)
 
 ## Screenshot
 ![screenshot of main](./employeedirectory/src/components/images/screenshot.png)
