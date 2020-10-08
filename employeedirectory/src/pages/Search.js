@@ -8,6 +8,7 @@ import Maintable from "../components/EmployeeTable"
 import Row from "../components/Row"
 import Hero from "../components/Hero"
 
+
 class Search extends Component {
   state = {
     search: [],
@@ -16,8 +17,8 @@ class Search extends Component {
     results: [],
     error: "",
   };
+  
 
-  // When the component mounts, get a list of all available base breeds and update this.state.breeds
   componentDidMount() {
     API.getRandomEmployees()
       .then(res => this.setState({ employees: res.data.results }))
@@ -27,29 +28,28 @@ class Search extends Component {
   handleInputChange = event => {
     this.setState({ search: event.target.value });
     const filteredChoice = this.state.employees.filter((filter)=>{
-      let chosen = filter.name.first + filter.name.last 
-      return chosen.indexOf(this.state.search) !== -1;
+      let chosen = filter.name.first + filter.name.last + filter.gender
+      console.log(event.target.value)
+      return chosen.indexOf(event.target.value) !== -1;
     })
-    console.log(filteredChoice)
     this.setState({searchedEmp: filteredChoice})
   };
 
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   API.getSearchedEmployee(this.state.search)
-  //     .then(res => {
-  //       if (res.data.status === "error") {
-  //         throw new Error(res.data.results);
-  //       }
-  //       this.setState({ results: res.data.results, error: "" });
-  //     })
-  //     .catch(err => this.setState({ error: err.results }));
-  // };
+
   render() {
+    let table;
+    const searched = this.state.search;
+    let alterstate
+    if(searched===undefined || searched.length===0){alterstate= false}
+    else{alterstate=true}
+    {console.log(searched)}
+    {console.log(alterstate)}
+    if (alterstate=false){table=<Maintable employees= {this.state.employees} />} 
+    else {table=<SearchResults results={this.state.searchedEmp}/>}
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
-          <Hero backgroundImage="https://image.shutterstock.com/z/stock-photo-successful-team-group-of-young-business-people-working-and-communicating-together-in-creative-583591807.jpg">
+          <Hero>
           </Hero>
           <Alert
             type="danger"
@@ -66,8 +66,9 @@ class Search extends Component {
             </div>
           </Row>
           <Row className="justify-content-md-center">
-            <SearchResults results={this.state.searchedEmp} />
-            <Maintable employees= {this.state.employees}/>
+            {table}
+            {/* <SearchResults results={this.state.searchedEmp} />
+            <Maintable employees= {this.state.employees}/> */}
           </Row>
         </Container>
       </div>
