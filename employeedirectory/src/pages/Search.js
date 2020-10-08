@@ -16,32 +16,33 @@ class Search extends Component {
     error: "",
   };
   
-
+  //This will let us display the default employee directory
   componentDidMount() {
     API.getRandomEmployees()
       .then(res => this.setState({ employees: res.data.results }))
       .catch(err => console.log(err));
   };
 
-
+  //This will let us display the searched employees
   handleInputChange = event => {
     let searchkey= event.target.value;
     console.log("searchkey", searchkey)
+    //If the user types a lower case letter as the first in the string it will be changed to uppercase
     let uppercaseKey= searchkey.charAt(0).toUpperCase() + searchkey.slice(1);
     console.log("uppercase", uppercaseKey)
     this.setState({ search: uppercaseKey});
-    
     const filteredChoice = this.state.employees.filter((filter)=>{
       let chosen = filter.name.first + filter.name.last + filter.gender
       console.log(event.target.value)
       return chosen.indexOf(uppercaseKey) !== -1;
     })
+    //sends the search to the state
     this.setState({searchedEmp: filteredChoice})
   };
 
 
   render() {
-
+    //This will search to see whether there is any content in the state.search. If there is, it will display the searched table, if not it will display the default
     let table;
     const searched = this.state.search;
     let alterstate
@@ -51,6 +52,7 @@ class Search extends Component {
     {console.log(alterstate)}
     if (alterstate===false){table=<Maintable employees= {this.state.employees} />} 
     else {table=<SearchResults results={this.state.searchedEmp}/>}
+    //Format of the actual webpage
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
